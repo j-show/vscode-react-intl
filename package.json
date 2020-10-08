@@ -1,0 +1,108 @@
+{
+  "name": "vscode-react-intl",
+  "version": "1.0.0",
+  "displayName": "React Intl Helper",
+  "description": "react-intl's VSCode extension for save and automatic translation of multiple languages",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "react-intl",
+    "react intl",
+    "next",
+    "next intl",
+    "intl",
+    "i18n"
+  ],
+  "publisher": "jShow",
+  "icon": "static/logo.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/j-show/vscode-react-intl.git"
+  },
+  "homepage": "https://github.com/j-show/vscode-react-intl",
+  "categories": [
+    "Other"
+  ],
+  "engines": {
+    "vscode": "^1.37.0"
+  },
+  "preview": false,
+  "main": "./dist/extension",
+  "scripts": {
+    "deploy": "vsce publish --yarn",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "node ./dist/test/runTest.js",
+    "vscode:prepublish": "yarn run compile",
+    "pretest": "yarn run compile"
+  },
+  "activationEvents": [
+    "onLanguage:react",
+    "onLanguage:typescriptreact",
+    "onLanguage:javascriptreact"
+  ],
+  "contributes": {
+    "menus": {
+      "editor/title": [
+        {
+          "when": "editorFocus && resourceLangId == react",
+          "command": "react-intl.translateView",
+          "group": "navigation"
+        },
+        {
+          "when": "editorFocus && resourceLangId == typescriptreact",
+          "command": "react-intl.translateView",
+          "group": "navigation"
+        },
+        {
+          "when": "editorFocus && resourceLangId == javascriptreact",
+          "command": "react-intl.translateView",
+          "group": "navigation"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "react-intl.translateView",
+        "title": "Translate text with React Intl",
+        "icon": {
+          "light": "./static/logo_light.png",
+          "dark": "./static/logo_drak.png"
+        }
+      },
+      {
+        "command": "react-intl.autoInitPath",
+        "title": "react-intl: Automatic config intl path"
+      },
+      {
+        "command": "react-intl.manualInitPath",
+        "title": "react-intl: Manual config intl path"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "react-intl",
+      "properties": {
+        "react-intl.intlPaths": {
+          "type": "string",
+          "description": "Translate file path (relative to project root path)"
+        },
+        "react-intl.mainLocale": {
+          "type": "string",
+          "default": "zh-CN",
+          "description": "Main language"
+        }
+      }
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/mocha": "^8.0.3",
+    "@types/vscode": "^1.49.0",
+    "mocha": "^8.1.3",
+    "tslint": "^6.1.3",
+    "typescript": "^4.0.3",
+    "vsce": "^1.81.1",
+    "vscode-test": "^1.4.0"
+  }
+}
